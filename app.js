@@ -10,31 +10,34 @@ context.fillStyle = "rgba(0,0,0,0.05)";
 let x = 0;
 let y = Math.sin(Math.log(Math.pow(2)));
 let mul = 1;
+
 function draw() {
   context.save();
   context.setTransform(1, 0, 0, 1, 0, 0);
   context.fillRect(0, 0, canvas.width, canvas.height);
   context.restore();
   context.beginPath();
-  
+
   context.moveTo(x, y);
-  
+
   for (let i = 0; i < 1400; i++) {
     x++;
     // y = 250 * Math.tan( Math.log(Math.pow(x*mul, 2)));
-    y=250*Math.cos(x*mul/10*Math.PI*180)
+    y = 150 * Math.cos(Math.log(x**2*mul)) * Math.sin(x*mul);
+    context.strokeStyle = `rgba(${Math.random()*255},${Math.random()*25},${Math.random()*255},0.3)`;
+
     // const tmp = x/1000
     // y =100*Math.cos(Math.acos(tmp)*x*mul);
     // context.lineTo(x,y);
-    context.strokeRect(x,y,1,1);
+    context.strokeRect(x, y, 1, 1);
 
   }
 
   context.stroke();
   context.closePath();
-  
 
-  mul   += 0.00001000 * mul;
+
+  mul += 0.00001000 * mul;
   x = -700;
 
   requestAnimationFrame(draw);
